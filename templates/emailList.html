@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+<!-- {% load static %} -->
+{% block title_block %}
+    {{title}}
+{% endblock %}
+{% block body_block %}
+{% load crispy_forms_tags %}
+
+<style>
+    .listSubject>a:link {
+        text-decoration: none;
+    }
+    .listSubject>a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="p-5">
+    {% if email_type == 'sent' %}
+        <h3>Your sent email</h3>
+    {% else %}
+        <h3>Inbox {{email_type}} email</h3>
+    {% endif %}
+
+    {% if email|length == 0 %}
+        <h5>No email</h5>
+    {% else %}
+        {% for em in email %}
+            <div class="row border-top border-bottom py-2">
+                <div class="col-3">
+                    To: {{em.receiver}}
+                </div>
+                <div class="col-6 listSubject">
+                    <a href="{% url 'App_Email:emailDetail' py=em.pk%}" style="color: black;">{{em.subject}}</a>
+                </div>
+                <div class="col-3">
+                    {{em.upload_date}}
+                </div>
+            </div>
+      {% endfor %}
+    {% endif %}
+</div>
+
+{% endblock %}
+
+{% block script_block %} 
+
+<script>
+     
+</script>
+
+{% endblock %}

@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+<!-- {% load static %} -->
+{% block title_block %}
+    {{title}}
+{% endblock %}
+
+{% block body_block %}
+{% load crispy_forms_tags %}
+
+<style>
+  .listSubject>a:link {
+        text-decoration: none;
+    }
+    .listSubject>a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div>
+    <section class="Part_Req_tab_section big_section_cmn">
+        <div class="container-fluid">
+            <div class="tab_content_area">
+                <!-- tab start  -->
+                <ul class="nav nav-tabs custom_tab_menu" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" style="color: #495057;" id="home_1-tab" data-bs-toggle="tab"
+                            data-bs-target="#home_1" type="button" role="tab" aria-controls="home_1"
+                            aria-selected="true">primary
+                            </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" style="color: #495057;" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                            type="button" role="tab" aria-controls="home" aria-selected="false">promotions
+                            </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" style="color: #495057;" id="profile-tab" data-bs-toggle="tab"
+                            data-bs-target="#profile" type="button" role="tab" aria-controls="profile"
+                            aria-selected="false">social
+                            </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" style="color: #495057;" id="contact-tab" data-bs-toggle="tab"
+                            data-bs-target="#contact" type="button" role="tab" aria-controls="contact"
+                            aria-selected="false">forum
+                            </button>
+                    </li>
+                </ul>
+                <!-- tab menu end  -->
+                <!-- tab content  -->
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade active show  cmn_for_tab_content" id="home_1" role="tabpanel"
+                        aria-labelledby="home-tab">
+                        <!-- tab 1 cotnatn start  -->
+
+                        <div class="tab_2_start">
+                            {% if primary|length == 0 %}
+                                <h5>No email</h5>
+                            {% else %}
+                                {% for em in primary %}
+                                    <div class="row border-top border-bottom py-2">
+                                        <div class="col-3">
+                                            To: {{em.receiver}}
+                                        </div>
+                                        <div class="col-6 listSubject">
+                                            <a href="{% url 'App_Email:emailDetail' py=em.pk%}" style="color: black;">{{em.subject}}</a>
+                                        </div>
+                                        <div class="col-3">
+                                            {{em.upload_date}}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+
+                        <!-- tab 1 cotnatn start  -->
+
+                    </div>
+                    <div class="tab-pane fade   cmn_for_tab_content" id="home" role="tabpanel"
+                        aria-labelledby="home-tab">
+                        <!-- tab 1 cotnatn start  -->
+
+                        <div class="tab_2_start">
+                            {% if promotions|length == 0 %}
+                                <h5>No email</h5>
+                            {% else %}
+                                {% for em in promotions %}
+                                    <div class="row border-top border-bottom py-2">
+                                        <div class="col-3">
+                                            To: {{em.receiver}}
+                                        </div>
+                                        <div class="col-6 listSubject">
+                                            <a href="{% url 'App_Email:emailDetail' py=em.pk%}" style="color: black;">{{em.subject}}</a>
+                                        </div>
+                                        <div class="col-3">
+                                            {{em.upload_date}}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+
+                        <!-- tab 1 cotnatn start  -->
+
+                    </div>
+                    <div class="tab-pane fade cmn_for_tab_content" id="profile" role="tabpanel"
+                        aria-labelledby="profile-tab">
+
+                        <!-- tab 2 content start  -->
+                        <div class="tab_2_start">
+                            {% if social|length == 0 %}
+                                <h5>No email</h5>
+                            {% else %}
+                                {% for em in social %}
+                                    <div class="row border-top border-bottom py-2">
+                                        <div class="col-3">
+                                            To: {{em.receiver}}
+                                        </div>
+                                        <div class="col-6 listSubject">
+                                            <a href="{% url 'App_Email:emailDetail' py=em.pk%}" style="color: black;">{{em.subject}}</a>
+                                        </div>
+                                        <div class="col-3">
+                                            {{em.upload_date}}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <!-- tab 2 content start ebd  -->
+                    </div>
+                    <div class="tab-pane fade cmn_for_tab_content" id="contact" role="tabpanel"
+                        aria-labelledby="contact-tab">
+
+                        <!-- tab 3 content start  -->
+
+                        <div class="tab_2_start tab_3_start">
+                            {% if forum|length == 0 %}
+                                <h5>No email</h5>
+                            {% else %}
+                                {% for em in forum %}
+                                    <div class="row border-top border-bottom py-2">
+                                        <div class="col-3">
+                                            To: {{em.receiver}}
+                                        </div>
+                                        <div class="col-6 listSubject">
+                                            <a href="{% url 'App_Email:emailDetail' py=em.pk%}" style="color: black;">{{em.subject}}</a>
+                                        </div>
+                                        <div class="col-3">
+                                            {{em.upload_date}}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+
+                        <!-- tab 3 content start  -->
+
+                    </div>
+                </div>
+                <!-- tab start  -->
+            </div>
+        </div>
+    </section>
+
+</div>
+
+{% endblock %}
+
+{% block script_block %} 
+
+<script>
+     
+</script>
+
+{% endblock %}

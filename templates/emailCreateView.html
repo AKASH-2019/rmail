@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+<!-- {% load static %} -->
+{% block title_block %}
+    {{title}}
+{% endblock %}
+{% block body_block %}
+{% load crispy_forms_tags %}
+
+
+<style>
+    
+</style>
+
+<div class="p-5">
+    <form id="emailCreatForm" action="">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Recipients Email</label>
+            <input type="email" name="email" class="form-control" id="emailInput" placeholder="name@example.com">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Subject</label>
+            <input type="text" name="sub" class="form-control" id="subInput" placeholder="You have an invitation">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Message</label>
+            <textarea name="message" class="form-control" id="msgInput" rows="3"></textarea>
+        </div>
+        <div class="mb-3 text-end">
+            <a href="#" id="emailCreateBtn" class="btn btn-primary px-4">Sent</a>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
+
+{% block script_block %} 
+
+<script>
+   document.getElementById("emailCreateBtn").addEventListener("click", async () => {
+
+        if(document.getElementById("emailInput").value.length == 0){
+            document.getElementById("emailInput").style.borderColor = "red";
+            return;
+        }
+        else{
+            document.getElementById("emailInput").style.borderColor = "#ced4da";
+        }
+        if(document.getElementById("subInput").value.length == 0){
+            document.getElementById("subInput").style.borderColor = "red";
+            return;
+        }
+        else{
+            document.getElementById("subInput").style.borderColor = "#ced4da";
+        }
+        if(document.getElementById("msgInput").value.length == 0){
+            document.getElementById("msgInput").style.borderColor = "red";
+            return;
+        }
+        else{
+            document.getElementById("msgInput").style.borderColor = "#ced4da";
+        }
+
+
+        var frm = new FormData(document.getElementById("emailCreatForm"));
+        // frm.forEach(element => {
+        //     console.log(element);
+        // });
+
+        var data = await fetch('/rmail/insert', {
+            method: 'post',
+            body: frm
+        });
+
+        var res = await data.json();
+        if(res.ret_data == "false"){
+            alert("email is not valid!!");
+        }else{
+            window.location.href = "/rmail/sent";
+        }
+        // console.log(res[0].ret_val);
+        // if(res[0].ret_val > 0 && res[0].user_id > 0 && res[0].ret_val == res[0].user_id){
+        //     window.location = `/petbazaar/login`;
+        // }
+
+});    
+</script>
+
+{% endblock %}
