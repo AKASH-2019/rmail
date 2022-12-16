@@ -1,5 +1,8 @@
 # Create an email platform by using Django
 
+## Deployment url
+https://munazer.pythonanywhere.com/login
+
 ## LOCAL SETUP
    ** Create virtual environment(python3 -m venv venv) 
       and install all dependencies which is exist in requirment.txt 
@@ -34,7 +37,3 @@ This is the home page. Users can see inbox email with all category.
 ![IMAGE_DESCRIPTION](rmail_snapshots/home.png)
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 2d8fa11b58c0abcf6b6a21bcd7797e8e9721f564
